@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def show_catalog(request):
+    return render(request, 'catalog/catalog.html')
