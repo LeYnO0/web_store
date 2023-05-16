@@ -9,5 +9,5 @@ def about_us(request):
     return render(request, 'main/page_about_us.html')
 
 
-def contacts(requrst):
-    return render(requrst, 'main/contacts.html')
+def contacts(request):
+    return render(request, 'main/contacts.html')

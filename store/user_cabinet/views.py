@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 
@@ -10,4 +9,8 @@ def registration(request):
             form.save()
     else:
         form = UserCreationForm()
-    return render(request, 'user_cabinet/authorization.html', {'form': form})
+    return render(request, 'user_cabinet/register.html', {'form': form})
+
+
+def login(request):
+    return render(request, 'user_cabinet/login.html')
