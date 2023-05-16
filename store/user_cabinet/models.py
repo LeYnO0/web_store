@@ -1,5 +1,5 @@
 from django.db import models
-
+from django import forms
 
 class Articles(models.Model):
     title = models.CharField('Название', max_length=50,)
@@ -17,3 +17,8 @@ class Articles(models.Model):
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
