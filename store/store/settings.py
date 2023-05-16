@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     'catalog',
     'main',
     'user_cabinet',
-    'crispy_forms',
 ]
 
 MIDDLEWARE = [
