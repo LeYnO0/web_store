@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,17 +10,23 @@
     <body class="container">
         <h1>User: {{ user }}</h1>
         {% block content %}
-        {% if user.is_authenticated %}
+        {% if request.user.is_authenticated and request.user.is_staff %}
+            <a href="{% url 'logout' %}">Выйти | <a href="{% url 'catalog_editor' %}"> Редактировать каталог </a></a><br><br>
+            <a href="about/"> На страницу про нас</a><br>
+            <a href="contacts/"> Контакты и обратная связь</a><br>
+            <a href="catalog/"> Перейти к покупкам </a>
+        {% endif %}
+        {% if request.user.is_authenticated and not request.user.is_staff %}
             <a href="{% url 'logout' %}">Выйти</a><br><br>
             <a href="about/"> На страницу про нас</a><br>
             <a href="contacts/"> Контакты и обратная связь</a><br>
             <a href="catalog/"> Перейти к покупкам </a>
-        {% else %}
+        {% endif %}
+        {% if not request.user.is_authenticated and not request.user.is_staff %}
             <a href="{% url 'logining' %}">Войти</a> | <a href="register/"> Зарегестрироваться</a><br><br>
             <a href="about/"> На страницу про нас</a><br>
             <a href="contacts/"> Контакты и обратная связь</a><br>
             <a href="catalog/"> Перейти к покупкам </a>
-
         {% endif %}
         {% endblock %}
 </head>

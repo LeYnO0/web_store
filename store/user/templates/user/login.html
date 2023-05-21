@@ -3,10 +3,11 @@
 {% block title %}Log-in{% endblock %}
 {% block content %}
     <h1>Log-in</h1>
-    <form action="{% url 'logining' %}" method="post">
+<form action="{% url 'logining' %}" method="post">
         {% csrf_token %}
         {{form.as_p}}
-        </form>
     <button type="submit" class="btn btn-success">Войти</button><br>
+    <a href = "{% url 'home' %}">На главную</a><br>
     <a href="{% url 'password_reset' %}">Сменить пароль</a>
+</form>
 {% endblock %}

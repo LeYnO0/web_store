@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <h1>Это страница с каталогом</h1>
+    {% for element in elements %}
+        <div class="alert alert-warning">
+            <h3>{{ element.name }}</h3>
+            <p>{{ element.description }}</p>
+            <img src="{{ element.image }}">
+            <h5>{{ element.price }}</h5>
+        </div>
+    {% endfor %}
 </head>
 <body>
 

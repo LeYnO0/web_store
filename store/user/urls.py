@@ -1,13 +1,11 @@
-from django.urls import path, include
-
+from django.urls import path
 from . import views
-from .views import Register
-import django.contrib.auth.urls
+from .views import Register, ResetPasswordView
+from django.contrib.auth.views import PasswordResetView
 
 urlpatterns = [
-    # path('', include('django.contrib.auth.urls')),
     path('register/', Register.as_view()),
     path('login/', views.logining, name='logining'),
-    path('password_reset/', views.password_reset, name='password_reset'),
-    path('logout/', views.logout_view, name='logout')
+    path('password-reset/', ResetPasswordView.as_view(),  name='password_reset'),
+    path('logout/', views.logout_view, name='logout'),
 ]

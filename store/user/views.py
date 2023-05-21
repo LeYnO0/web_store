@@ -1,9 +1,11 @@
 from django.contrib.auth import login, logout
 from django.contrib import auth
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import View
-from .forms import UserLoginForm
-from .forms import UserCreationForm
+from .forms import UserLoginForm, UserCreationForm
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 class Register(View):
@@ -29,6 +31,17 @@ class Register(View):
         return render(request, self.template_name, context)
 
 
+class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
+    template_name = 'user/password_reset_form.html'
+    email_template_name = 'user/password_reset_email.html'
+    subject_template_name = 'user/password_reset_subject.html'
+    success_message = "We've emailed you instructions for setting your password, " \
+                      "if an account exists with the email you entered. You should receive them shortly." \
+                      " If you don't receive an email, " \
+                      "please make sure you've entered the address you registered with, and check your spam folder."
+    success_url = reverse_lazy('home')
+
+
 def logining(request):
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
@@ -38,7 +51,7 @@ def logining(request):
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
-                redirect('/')
+                return redirect('/')
     else:
         form = UserLoginForm()
     context = {'form': form}
@@ -51,4 +64,5 @@ def logout_view(request):
 
 
 def password_reset(request):
-    return render(request, 'user/password_reset.html')
+    # if request.method == 'POST':
+    return render(request, 'user/password_reset_form.html')

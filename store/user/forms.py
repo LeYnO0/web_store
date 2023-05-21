@@ -5,6 +5,11 @@ User = get_user_model()
 
 
 class UserLoginForm(AuthenticationForm):
+
     class Meta():
         model = User
         fields = ('username', 'password')
+
+
+class ResetPasswordForm():
+    pass
